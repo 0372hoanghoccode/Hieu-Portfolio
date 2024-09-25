@@ -105,30 +105,29 @@ if (localStorage.getItem("theme") === "light_theme") {
 }
 
 
+//send mail
 (function() {
-  emailjs.init("KrIqtPYupZuDu3N0k"); // Thay YOUR_PUBLIC_KEY bằng Public Key bạn đã sao chép
+  emailjs.init('GjHarngP0GnbmS5np'); 
 })();
 
 function isValidEmail(email) {
-  const emailPattern = /^[^\s@]+@gmail\.com$/; // Chỉ chấp nhận email gmail
+  const emailPattern = /^[^\s@]+@gmail\.com$/;
   return emailPattern.test(email);
 }
 
 document.getElementById('contact-form').addEventListener('submit', function(event) {
-  event.preventDefault(); // Ngăn chặn hành vi mặc định của form
+  event.preventDefault();
 
   const name = document.getElementById('name').value.trim();
   const email = document.getElementById('email').value.trim();
-  const phone = document.getElementById('phone').value.trim(); // Lấy số điện thoại
   const message = document.getElementById('message').value.trim();
 
-  // Kiểm tra các trường thông tin
   if (!name || !email || !message) {
-      alert('Vui lòng điền đầy đủ!');
+      alert('Vui lòng điền đầy đủ thông tin!');
       return;
   }
 
-  const namePattern = /^[\p{L}\s]+$/u; // Kiểm tra tên hợp lệ
+  const namePattern = /^[\p{L}\s]+$/u; 
   if (!namePattern.test(name)) {
       alert('Tên không hợp lệ!');
       return;
@@ -140,25 +139,21 @@ document.getElementById('contact-form').addEventListener('submit', function(even
   }
 
   if (message.length < 2) {
-      alert('Hãy soạn ít nhất 2 ký tự để gửi!');
+      alert('Hãy soạn ít nhất 2 kí tự để gửi!');
       return;
   }
-
-  // Gửi email qua EmailJS
-  emailjs.send('service_977w1cr', 'template_a72090p', {
+//gửi mail
+  emailjs.send('service_6au3nns', 'template_iq1tgjs', {
       name: name,
       email: email,
-      phone: phone, // Thêm số điện thoại nếu cần
       message: message
   })
   .then(function(response) {
       console.log('Email gửi thành công!', response.status, response.text);
       alert('Tin nhắn đã được gửi!');
-      document.getElementById('contact-form').reset(); 
+      document.getElementById('contactForm').reset(); 
   }, function(error) {
       console.error('Lỗi khi gửi email.', error);
       alert('Gửi tin nhắn không thành công!');
   });
 });
-
-

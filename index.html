@@ -20,8 +20,9 @@
   <!-- 
     - google font link
   -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <!-- Sử dụng CDN mới nhất từ jsDelivr -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -722,9 +723,7 @@ In addition to coding, I have a strong curiosity for learning new technologies a
               <div class="wrapper">
                 <h3 class="h4 contact-item-title">Phone:</h3>
 
-                <a href="tel:01234567789" class="contact-info">(01) 234 567 789</a>
-
-                <a href="tel:09765432200" class="contact-info">(09) 765 432 200</a>
+                <a href="tel:01234567789" class="contact-info">0948522144</a>
               </div>
 
             </li>
@@ -773,36 +772,19 @@ In addition to coding, I have a strong curiosity for learning new technologies a
         <form id="contact-form" class="contact-form">
           <div class="form-wrapper">
               <label for="name" class="form-label">Tên</label>
-              <div class="input-wrapper">
-                  <input type="text" name="name" id="name" required placeholder="Ví dụ: John Doe" class="input-field">
-                  <ion-icon name="person-circle"></ion-icon>
-              </div>
+              <input type="text" name="name" id="name" required placeholder="Ví dụ: Hieu Truong" class="input-field">
           </div>
-      
+          
           <div class="form-wrapper">
               <label for="email" class="form-label">Email</label>
-              <div class="input-wrapper">
-                  <input type="email" name="email" id="email" required placeholder="Ví dụ: johndoe@mail.com" class="input-field">
-                  <ion-icon name="mail"></ion-icon>
-              </div>
+              <input type="email" name="email" id="email" required placeholder="Ví dụ: HieuTruong@mail.com" class="input-field">
           </div>
-      
-          <div class="form-wrapper">
-              <label for="phone" class="form-label">Điện Thoại</label>
-              <div class="input-wrapper">
-                  <input type="tel" name="phone" id="phone" required placeholder="Số điện thoại" class="input-field">
-                  <ion-icon name="call"></ion-icon>
-              </div>
-          </div>
-      
+          
           <div class="form-wrapper">
               <label for="message" class="form-label">Tin Nhắn</label>
-              <div class="input-wrapper">
-                  <textarea name="message" id="message" required placeholder="Viết tin nhắn..." class="input-field"></textarea>
-                  <ion-icon name="chatbubbles"></ion-icon>
-              </div>
+              <textarea name="message" id="message" required placeholder="Viết tin nhắn..." class="input-field"></textarea>
           </div>
-      
+          
           <button type="submit" class="btn btn-primary">Gửi</button>
       </form>
 
@@ -810,10 +792,6 @@ In addition to coding, I have a strong curiosity for learning new technologies a
 
     </article>
   </main>
-
-
-
-
 
   <!-- 
     - #FOOTER
