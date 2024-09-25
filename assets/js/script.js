@@ -106,11 +106,11 @@ if (localStorage.getItem("theme") === "light_theme") {
 
 
 (function() {
-  emailjs.init("KrIqtPYupZuDu3N0k"); // Thay YOUR_PUBLIC_KEY bằng Public Key của bạn
+  emailjs.init("KrIqtPYupZuDu3N0k"); // Thay YOUR_PUBLIC_KEY bằng Public Key bạn đã sao chép
 })();
 
 function isValidEmail(email) {
-  const emailPattern = /^[^\s@]+@gmail\.com$/;
+  const emailPattern = /^[^\s@]+@gmail\.com$/; // Chỉ chấp nhận email gmail
   return emailPattern.test(email);
 }
 
@@ -119,6 +119,7 @@ document.getElementById('contact-form').addEventListener('submit', function(even
 
   const name = document.getElementById('name').value.trim();
   const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim(); // Lấy số điện thoại
   const message = document.getElementById('message').value.trim();
 
   // Kiểm tra các trường thông tin
@@ -127,7 +128,7 @@ document.getElementById('contact-form').addEventListener('submit', function(even
       return;
   }
 
-  const namePattern = /^[\p{L}\s]+$/u; 
+  const namePattern = /^[\p{L}\s]+$/u; // Kiểm tra tên hợp lệ
   if (!namePattern.test(name)) {
       alert('Tên không hợp lệ!');
       return;
@@ -139,7 +140,7 @@ document.getElementById('contact-form').addEventListener('submit', function(even
   }
 
   if (message.length < 2) {
-      alert('Hãy soạn ít nhất 2 kí tự để gửi!');
+      alert('Hãy soạn ít nhất 2 ký tự để gửi!');
       return;
   }
 
@@ -147,6 +148,7 @@ document.getElementById('contact-form').addEventListener('submit', function(even
   emailjs.send('service_977w1cr', 'template_a72090p', {
       name: name,
       email: email,
+      phone: phone, // Thêm số điện thoại nếu cần
       message: message
   })
   .then(function(response) {
@@ -158,3 +160,5 @@ document.getElementById('contact-form').addEventListener('submit', function(even
       alert('Gửi tin nhắn không thành công!');
   });
 });
+
+
