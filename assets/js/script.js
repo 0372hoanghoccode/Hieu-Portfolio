@@ -159,7 +159,6 @@ document.getElementById('contact-form').addEventListener('submit', function(even
 });
 
 //chuyển ngữ 
-// Đối tượng chứa các bản dịch Anh-Việt
 const translations = {
   en: {
     home: "Home",
@@ -231,7 +230,6 @@ const translations = {
   }
 };
 
-// Lấy các phần tử cần chuyển ngữ
 const languageSelect = document.getElementById("lang");
 const navbarLinks = {
   home: document.querySelector('a[href="#home"]'),
@@ -260,8 +258,6 @@ const sectionTitles = document.querySelectorAll('.section-title');
 const cvButton = document.querySelector('.btn-group .btn.btn-primary');
 const sectionText = document.querySelectorAll('.section-text'); 
 
-// Hàm cập nhật ngôn ngữ
-// Hàm cập nhật ngôn ngữ
 function updateLanguage(language) {
   navbarLinks.home.textContent = translations[language].home + ".";
   navbarLinks.about.textContent = translations[language].about + ".";
@@ -283,12 +279,10 @@ function updateLanguage(language) {
   scrollDown.textContent = translations[language].scrollDown;
   cvButton.textContent = translations[language].cvButton;
 
-  // Cập nhật tất cả các section-title
   sectionTitles.forEach((title, index) => {
     title.textContent = translations[language].sectionTitles[index];
   });
 
-  // Cập nhật nội dung cho các tiêu đề mục liên hệ
   contactItemTitles.forEach((title, index) => {
     title.textContent = translations[language].contactItemTitles[index];
   });
@@ -299,12 +293,12 @@ function updateLanguage(language) {
 }
 
 
-// Lắng nghe sự kiện thay đổi ngôn ngữ
+
 languageSelect.addEventListener("change", function () {
   const selectedLanguage = languageSelect.value; 
   updateLanguage(selectedLanguage); 
 });
 
-// Thiết lập ngôn ngữ mặc định là tiếng Anh
+//mặc định là tiếng Anh
 updateLanguage("en");
 
