@@ -748,6 +748,7 @@ main { overflow-x: hidden; }
   align-items: flex-start;
   gap: 15px;
   margin-bottom: 20px;
+  padding-left: 20px;
 }
 
 .contact-item-icon {
