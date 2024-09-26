@@ -813,7 +813,7 @@ main { overflow-x: hidden; }
   color: var(--color-primary);
   font-size: var(--fs-7);
   font-family: var(--ff-poppins);
-  margin-bottom: 8px;
+  margin-bottom: 15px;
   margin-left: 5px;
 }
 
@@ -853,6 +853,13 @@ textarea.input-field {
   width: 100%;
   background: var(--color-primary);
   color: var(--bg-primary);
+}
+
+.error-message {
+  color: red; /* Màu đỏ cho thông báo lỗi */
+  font-size: 0.875rem; /* Kích thước chữ nhỏ */
+  margin-top: 0.25rem; /* Khoảng cách trên */
+  display: none;
 }
 
 

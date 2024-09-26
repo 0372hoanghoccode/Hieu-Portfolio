@@ -104,7 +104,6 @@ if (localStorage.getItem("theme") === "light_theme") {
   document.body.classList.add("dark_theme");
 }
 
-
 //send mail
 (function() {
   emailjs.init('KrIqtPYupZuDu3N0k'); 
@@ -115,48 +114,83 @@ function isValidEmail(email) {
   return emailPattern.test(email);
 }
 
-document.getElementById('contact-form').addEventListener('submit', function(event) {
-  event.preventDefault();
-
+function validateName() {
   const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const message = document.getElementById('message').value.trim();
-
-  if (!name || !email || !message) {
-      alert('Vui lòng điền đầy đủ thông tin!');
-      return;
-  }
-
   const namePattern = /^[\p{L}\s]+$/u; 
+  const nameError = document.getElementById('name-error');
+ 
   if (!namePattern.test(name)) {
-      alert('Tên không hợp lệ!');
-      return;
+      nameError.innerText = 'Invalid name!';
+      nameError.style.display = 'block'; 
+      return false;
+  } else {
+      nameError.innerText = '';
+      nameError.style.display = 'none'; 
+      return true;
   }
+}
 
+function validateEmail() {
+  const email = document.getElementById('email').value.trim();
+  const emailError = document.getElementById('email-error');
+  
   if (!isValidEmail(email)) {
-      alert('Vui lòng nhập địa chỉ email hợp lệ!');
+      emailError.innerText = 'Please enter a valid email address!';
+      emailError.style.display = 'block'; 
+      return false;
+  } else {
+      emailError.innerText = '';
+      emailError.style.display = 'none'; 
+      return true;
+  }
+}
+
+function validateMessage() {
+  const message = document.getElementById('message').value.trim();
+  const messageError = document.getElementById('message-error');
+  
+  if (message.length < 2) {
+      messageError.innerText = 'Please compose at least 2 characters to send!';
+      messageError.style.display = 'block'; 
+      return false;
+  } else {
+      messageError.innerText = '';
+      messageError.style.display = 'none'; 
+      return true;
+  }
+}
+
+document.getElementById('name').addEventListener('blur', validateName);
+document.getElementById('email').addEventListener('blur', validateEmail);
+document.getElementById('message').addEventListener('blur', validateMessage);
+
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+  event.preventDefault(); 
+
+  const isNameValid = validateName();
+  const isEmailValid = validateEmail();
+  const isMessageValid = validateMessage();
+
+  if (!isNameValid || !isEmailValid || !isMessageValid) {
+      alert('Vui lòng điền đầy đủ và chính xác thông tin!');
       return;
   }
 
-  if (message.length < 2) {
-      alert('Hãy soạn ít nhất 2 kí tự để gửi!');
-      return;
-  }
-//gửi mail
   emailjs.send('service_977w1cr', 'template_bywr4jw', {
-      name: name,
-      email: email,
-      message: message
+      name: document.getElementById('name').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      message: document.getElementById('message').value.trim()
   })
   .then(function(response) {
       console.log('Email gửi thành công!', response.status, response.text);
       alert('Tin nhắn đã được gửi!');
-      document.getElementById('contactForm').reset(); 
+      document.getElementById('contact-form').reset(); 
   }, function(error) {
       console.error('Lỗi khi gửi email.', error);
       alert('Gửi tin nhắn không thành công!');
   });
 });
+
 
 //chuyển ngữ 
 const translations = {
@@ -192,7 +226,13 @@ const translations = {
         "I develop simple, intuitive, and responsive user interfaces that help users get things done with less effort and time using those technologies.",
         "We develop the best quality websites that serve long-term. Well-documented, clean, easy, and elegant interfaces help any non-technical clients.",
         "Get in touch and let me know how I can help. Fill out the form and I’ll be in touch as soon as possible."
-    ] 
+    ],
+    errorMessages: [
+      "Invalid name!",
+      "Please enter a valid email address!",
+      "Please compose at least 2 characters to send!"
+    ]
+    
   },
   vi: {
     home: "Trang chủ",
@@ -226,6 +266,11 @@ const translations = {
       "Tôi phát triển các giao diện người dùng đơn giản, trực quan và phản hồi nhanh giúp người dùng hoàn thành công việc với ít nỗ lực và thời gian hơn.",
       "Chúng tôi phát triển các trang web chất lượng tốt nhất phục vụ lâu dài. Giao diện được tài liệu hóa tốt, sạch sẽ, dễ dàng và thanh lịch giúp các khách hàng không chuyên cũng có thể sử dụng.",
       "Hãy liên hệ và cho tôi biết tôi có thể giúp gì cho bạn. Điền vào mẫu và tôi sẽ liên lạc với bạn sớm nhất có thể."
+    ],
+    errorMessages: [
+      "Tên không hợp lệ!",
+      "Vui lòng nhập địa chỉ email hợp lệ!",
+      "Hãy soạn ít nhất 2 kí tự để gửi!"
     ]
   }
 };
@@ -257,6 +302,7 @@ const scrollDown = document.querySelector('.scroll-down');
 const sectionTitles = document.querySelectorAll('.section-title'); 
 const cvButton = document.querySelector('.btn-group .btn.btn-primary');
 const sectionText = document.querySelectorAll('.section-text'); 
+const errorMessages = document.querySelectorAll('.error-message');
 
 function updateLanguage(language) {
   navbarLinks.home.textContent = translations[language].home + ".";
@@ -290,9 +336,12 @@ function updateLanguage(language) {
   sectionText.forEach((text, index) => {
     text.textContent = translations[language].sectionText[index];
   });
+  
+  errorMessages.forEach((message, index) => {
+    message.textContent = translations[language].errorMessages[index];
+  });
+  
 }
-
-
 
 languageSelect.addEventListener("change", function () {
   const selectedLanguage = languageSelect.value; 
