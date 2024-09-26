@@ -143,7 +143,7 @@ document.getElementById('contact-form').addEventListener('submit', function(even
       return;
   }
 //gửi mail
-  emailjs.send('service_6au3nns', 'template_iq1tgjs', {
+  emailjs.send('service_977w1cr', 'template_bywr4jw', {
       name: name,
       email: email,
       message: message
