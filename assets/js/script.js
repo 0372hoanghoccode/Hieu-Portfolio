@@ -107,7 +107,7 @@ if (localStorage.getItem("theme") === "light_theme") {
 
 //send mail
 (function() {
-  emailjs.init('GjHarngP0GnbmS5np'); 
+  emailjs.init('KrIqtPYupZuDu3N0k'); 
 })();
 
 function isValidEmail(email) {
